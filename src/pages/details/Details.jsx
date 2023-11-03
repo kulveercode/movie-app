@@ -1,13 +1,12 @@
 import React from 'react';
 import "./style.scss";
 
-const Searchresult = () => {
+const Details = () => {
   return (
     <div>
-      Search Result
+      Details
     </div>
   )
 }
 
-export default Searchresult;
-
+export default Details
