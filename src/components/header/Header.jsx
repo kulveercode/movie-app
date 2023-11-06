@@ -18,6 +18,31 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location])
+
+    const controlNavbar = () => {
+      if(window.scrollY > 200) {
+        if(window.scrollY > lastScrollY && !mobileMenu)
+        {
+          setShow("hide")
+        } else {
+          setShow("show")
+        }
+      } else {
+        setShow("top")
+      }
+      setLastScrollY(window.scrollY);
+    }
+
+    useEffect(() => {
+      window.addEventListener("scroll", controlNavbar);
+      return() => {
+        window.removeEventListener("scroll", controlNavbar);
+;      }
+    }, [lastScrollY]);
+
     const searchQueryHandler = (event) => {
       if (event.key === "Enter" && query.length > 0) {
         navigate(`/search/${query}`);
@@ -60,7 +85,7 @@ const Header = () => {
                 navigationHandler("tv")
               }}>TV Shows</li>
               <li className="menuItem">
-                <HiOutlineSearch />
+                <HiOutlineSearch onClick={openSearch} />
               </li>
             </ul>
 
